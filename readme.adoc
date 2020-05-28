@@ -1,0 +1,28 @@
+= split_vcf
+
+This script writes out individual contacts from a single `.vcf` file into a separate file.
+
+The major difference and advantage to approaches based on `cut`, with the full name as file name.
+
+
+Currently illegal characters are replaced by `_`.
+
+
+== Usage
+
+Usage
+
+----
+perl split_vcf.pl -i input_file -o output_dir [OPTION]
+----
+
+On Unix platforms
+
+----
+./split_vcf.pl -i input_file -o output_dir [OPTION]
+----
+
+Currently, the only supported option is `-v` (execute `split_vcf.pl` without parameters for more informations)
+== Original program
+
+The source code come from https://code.google.com/archive/p/split-vcf-file/, it has been adapted minimally to work on non-windows platforms.
