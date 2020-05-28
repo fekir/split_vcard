@@ -342,7 +342,7 @@ sub usage {
     }
 
     print"
-Usage: perl split_vcf.pl -i input_file -o output_dir [OPTION]
+Usage: perl split_vcard.pl -i input_file -o output_dir [OPTION]
 
     -v,         Verbosity levels, 1-3
 
