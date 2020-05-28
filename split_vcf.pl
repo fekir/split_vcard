@@ -291,7 +291,7 @@ sub make_filename {
 
     # Append a VCF to filename and see if that file already exists
     # If it does, add a suffix
-    $test_fname = "$output_dir\\" . $fname . ".vcf";
+    $test_fname = "$output_dir/" . $fname . ".vcf";
 
     if (-e $test_fname) {
         print "\nWARN: $test_fname exists!";
@@ -299,7 +299,7 @@ sub make_filename {
         my $rand_num = int(rand(101));
 
         # Add random number as suffix
-        $test_fname = "$output_dir\\" . $fname . "_$rand_num" . ".vcf";
+        $test_fname = "$output_dir/" . $fname . "_$rand_num" . ".vcf";
         print "  Using $test_fname";
     }
 
