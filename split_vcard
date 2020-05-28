@@ -52,8 +52,12 @@ my $Debug_StopAfterEntries  = 0;
 #   -o      -> Output dir
 #               All the individual vcf files go here
 #   -v      -> verbosity level
-getopts('i:o:v:');
+getopts('i:o:v:h');
 
+if ($opt_h ) {
+    usage();
+    exit 0;
+}
 
 # input parameters checking
 if (!$opt_i) {
@@ -338,11 +342,10 @@ sub usage {
     # Exactly one parameter only.
     if (@_ >= 1) {
         my ($msg)   = @_;
-        print $msg;
+        print "$msg\n";
     }
 
-    print"
-Usage: perl split_vcard.pl -i input_file -o output_dir [OPTION]
+    print"Usage: perl split_vcard.pl -i input_file -o output_dir [OPTION]
 
     -v,         Verbosity levels, 1-3
 
