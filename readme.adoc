@@ -1,11 +1,11 @@
-= split_vcf
+= split_vcard
 
 This script writes out individual contacts from a single vCard file (`.vcf`) into separate files.
 
 The major difference and advantage to approaches based on `cut` or `csplit` is that files are named with the full name as file name.
 
 
-Currently illegal characters are replaced by `_`.
+Currently non-alfanumeric characters are replaced by `_`.
 
 
 == Usage
@@ -23,6 +23,7 @@ On Unix platforms
 ----
 
 Currently, the only supported option is `-v` (execute `split_vcf.pl` without parameters for more informations)
+
 == Original program
 
 The source code come from https://code.google.com/archive/p/split-vcf-file/, it has been adapted minimally to work on non-windows platforms.
