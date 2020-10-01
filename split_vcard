@@ -289,9 +289,12 @@ sub make_filename {
     my $fname = $input;
     my $test_fname = "";
 
+    # Remove initial tag
     $fname =~ s/^FN://g;
-    #$fname =~ s/[*()%!;\.\-\#\?@\s]/_/g;
-    $fname =~ s/[^a-zA-Z0-9_]/_/g;
+    # Remove separators but normal space " "
+    $fname =~ s/[\t\r\n\v\f]//g;
+    # Remove stranger chars
+    $fname =~ s/[*()%!;\.\-\#\?@]//g;
 
     # Append a VCF to filename and see if that file already exists
     # If it does, add a suffix
