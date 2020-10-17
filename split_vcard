@@ -117,10 +117,14 @@ while ($line = <INPUT_FILE>) {
         print "line: $line";
     }
 
+
+    if ($line !~ /\S/){
+        next;
+    }
     # If we are at the start of VCard
     #   - dump everything in separate file until we find end of this VCard
     #
-    if ($line =~ m/^BEGIN:VCARD/) {
+    elsif ($line =~ m/^BEGIN:VCARD/) {
 
         $Vcards_Processed++;
 
