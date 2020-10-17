@@ -52,7 +52,11 @@ my $Debug_StopAfterEntries  = 0;
 #   -o      -> Output dir
 #               All the individual vcf files go here
 #   -v      -> verbosity level
-getopts('i:o:v:h');
+#   -h      -> help
+#   -r      -> raw
+#            do not transform names, use as-is, might cause issues
+#            recomended onzl with vcard encoded in utf-8 and on non-fat filesystems 
+getopts('i:o:v:h:r');
 
 if ($opt_h ) {
     usage();
@@ -291,15 +295,38 @@ sub make_filename {
 
     # replace all illegal characters with '_'
     my $fname = $input;
-    my $test_fname = "";
 
     $fname =~ s/^FN://g;
+	$fname =~ s/[\r\n]//g;
     #$fname =~ s/[*()%!;\.\-\#\?@\s]/_/g;
-    $fname =~ s/[^a-zA-Z0-9_]/_/g;
+    if ($opt_r) {
+		# raw, no transformation ATM
+    } else {
+		#$fname =~ tr/àèéìòù/aeeiou/; # FIXME: breaks characters like ä
+		# FIXME: find something like tr that works with unicode and that does not need to parse the string n times
+		$fname =~ s/à/a/g;
+		$fname =~ s/À/A/g;
+		$fname =~ s/è/e/g;
+		$fname =~ s/é/e/g;
+		$fname =~ s/É/E/g;
+		$fname =~ s/È/E/g;
+		$fname =~ s/Ì/I/g;
+		$fname =~ s/Ò/O/g;
+		$fname =~ s/Ù/U/g;
+		$fname =~ s/ä/ae/g;
+		$fname =~ s/Ä/ae/g;
+		$fname =~ s/ö/oe/g;
+		$fname =~ s/Ö/oe/g;
+		$fname =~ s/ü/ue/g;
+		$fname =~ s/Ü/oe/g;
+		$fname =~ s/ẞ/SS/g;
+		$fname =~ s/ß/ss/g;
+		$fname =~ s/[^a-zA-Z0-9_\-\.]/_/g;
+    }
 
-    # Append a VCF to filename and see if that file already exists
-    # If it does, add a suffix
-    $test_fname = "$output_dir/" . $fname . ".vcf";
+	# Append .vcf to filename and see if that file already exists
+	# If it does, add a suffix
+	my $test_fname = "$output_dir/" . $fname . ".vcf";
 
     if (-e $test_fname) {
         print "\nWARN: $test_fname exists!";
@@ -317,7 +344,7 @@ sub make_filename {
         print "\nWARN: Opps, this is unexpected $fname exists too!";
         return int(rand(9999));
     }
-    
+
     return $fname;
 }
 

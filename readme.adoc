@@ -5,7 +5,12 @@ This script writes out individual contacts from a single vCard file (`.vcf`) int
 The major difference and advantage to approaches based on `cut` or `csplit` is that files are named with the full name as file name.
 
 
-Currently non-alfanumeric characters are replaced by `_`.
+Unless using `-r`, file names are "asciified" to ease the usage in multiple environments.
+For example, accents are removed (thus à is mapped to a), and vowels with dieresis are expanded to vowel appended by e, (thus ä is mapped to ae).
+Other characters might get mapped to some ASCII characters too.
+The mapping algorithm is not well-defined (yet).
+
+Characters not available in the https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_282[Portable Filename Character Set] are replaced by `-` (alphanumeric character and `.`, `_` and `-`).
 
 
 == Usage
@@ -22,8 +27,15 @@ On Unix platforms
 ./split_vcard -i input_file -o output_dir [OPTION]
 ----
 
-Currently, the only supported option is `-v` (execute `split_vcf.pl` without parameters for more informations)
+Supported options are
+
+	* -i      -> Input VCF filename
+	* -o      -> Output dir, where all individual vcf files goes
+	* -v      -> verbosity level
+	* -h      -> help
+	* -r      -> raw, does not transform names, recomended only on file systems that can rapresent all characters
+
 
 == Original program
 
-The source code come from https://code.google.com/archive/p/split-vcf-file/, it has been adapted minimally to work on non-windows platforms.
+The source code comes from https://code.google.com/archive/p/split-vcf-file/.
