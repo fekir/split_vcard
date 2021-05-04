@@ -29,11 +29,11 @@ On Unix platforms
 
 Supported options are
 
-	* -i      -> Input VCF filename
-	* -o      -> Output dir, where all individual vcf files goes
-	* -v      -> verbosity level
-	* -h      -> help
-	* -r      -> raw, does not transform names, recomended only on file systems that can rapresent all characters
+	* `-i`: Input VCF filename
+	* `-o`: Output dir, where all individual vcf files goes
+	* `-v`: verbosity level
+	* `-h`: help
+	* `-r`: raw, does not transform names, recommended only on file systems that can represent all characters
 
 
 == Original program

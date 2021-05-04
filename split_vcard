@@ -55,7 +55,7 @@ my $Debug_StopAfterEntries  = 0;
 #   -h      -> help
 #   -r      -> raw
 #            do not transform names, use as-is, might cause issues
-#            recomended onzl with vcard encoded in utf-8 and on non-fat filesystems 
+#            recommended only with vcard encoded in utf-8 and on non-fat filesystems
 getopts('i:o:v:h:r');
 
 if ($opt_h ) {
